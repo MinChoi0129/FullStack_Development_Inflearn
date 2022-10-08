@@ -1,27 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
-import ChildComponent from "./child";
-
+import MainPage from "./main/index";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <ChildComponent a={234} b="stasssdasdr" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <MainPage />;
 }
 
 export default App;
