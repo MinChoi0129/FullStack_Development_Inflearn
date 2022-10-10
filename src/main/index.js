@@ -33,7 +33,7 @@ function MainPage() {
           {products.map((product, idx) => {
             return (
               <div key={product.id} className="product-card">
-                <Link className="product-link" to={`/products/${idx}`}>
+                <Link className="product-link" to={`/products/${product.id}`}>
                   <div>
                     <img
                       className="product-img"
