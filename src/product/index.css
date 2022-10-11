@@ -1,0 +1,10 @@
+#image-box {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#image-box > img {
+    height: 100%;
+}

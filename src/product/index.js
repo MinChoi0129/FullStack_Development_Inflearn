@@ -18,8 +18,26 @@ function ProductComponent() {
         console.error(err);
       });
   }, []);
-  console.log(product);
-  return <h1>상품페이지{params.id}</h1>;
+
+  if (product === null) {
+    return <h1>Loading...</h1>;
+  }
+  return (
+    <div>
+      <div id="image-box">
+        <img src={"/" + product.imageUrl} />
+      </div>
+      <div id="profile-box">
+        <img src="/images/icons/avatar.png" />
+        <span>{product.seller}</span>
+      </div>
+      <div id="content-box">
+        <div id="name">{product.name}</div>
+        <div id="price">{product.price}</div>
+        <div id="description">{product.description}</div>
+      </div>
+    </div>
+  );
 }
 
 export default ProductComponent;
