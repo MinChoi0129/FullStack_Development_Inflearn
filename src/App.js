@@ -1,4 +1,4 @@
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "./App.css";
 import MainPageComponent from "./main";
 import UploadComponent from "./upload";
