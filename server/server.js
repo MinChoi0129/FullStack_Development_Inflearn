@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const models = require("./models");
 
 const app = express();
 const PORT = 8080;
@@ -36,10 +37,21 @@ app.get("/products", (req, res) => {
   });
 });
 
+app.get("/products/:id/events/:eventId", (req, res) => {
+  const { id, eventId } = req.params
+  res.send(`id는 ${id} 와 ${eventId}입니다.`)
+})
+
 app.post("/products", (req, res) => {
   res.send(req.body);
 });
 
 app.listen(PORT, () => {
   console.log("listening on port " + PORT);
+  models.sequelize.sync().then(() => {
+    console.log("DB connected!")
+  }).catch((err) => {
+    console.error(err)
+    process.exit()
+  })
 });
