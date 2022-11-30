@@ -38,20 +38,25 @@ app.get("/products", (req, res) => {
 });
 
 app.get("/products/:id/events/:eventId", (req, res) => {
-  const { id, eventId } = req.params
-  res.send(`id는 ${id} 와 ${eventId}입니다.`)
-})
+  const { id, eventId } = req.params;
+  res.send(`id는 ${id} 와 ${eventId}입니다.`);
+});
 
 app.post("/products", (req, res) => {
+  const { name, description, price, seller } = req.body;
+  models.product;
   res.send(req.body);
 });
 
 app.listen(PORT, () => {
   console.log("listening on port " + PORT);
-  models.sequelize.sync().then(() => {
-    console.log("DB connected!")
-  }).catch((err) => {
-    console.error(err)
-    process.exit()
-  })
+  models.sequelize
+    .sync()
+    .then(() => {
+      console.log("DB connected!");
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit();
+    });
 });
