@@ -9,41 +9,56 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/products", (req, res) => {
-  console.log(req.query);
-  res.send({
-    products: [
-      {
-        id: 1,
-        name: "농구공",
-        price: 100000,
-        seller: "조던",
-        imageUrl: "images/products/basketball1.jpeg",
-      },
-      {
-        id: 2,
-        name: "축구공",
-        price: 50000,
-        seller: "메시",
-        imageUrl: "images/products/soccerball1.jpg",
-      },
-      {
-        id: 3,
-        name: "키보드",
-        price: 10000,
-        seller: "그랩",
-        imageUrl: "images/products/keyboard1.jpg",
-      },
-    ],
-  });
-});
+  models.Product.findAll({
+    order: [["createdAt", "DESC"]],
+    attributes: ['id', 'name', 'price', 'createdAt', 'seller', 'imageUrl']
+  }).then((result) => {
+    console.log("PRODUCTS : ", result)
+    res.send({
+      products: result
+    })
+  }).catch((err) => {
+    console.error(err)
+    res.send("에러발생")
+  })
+})
 
-app.get("/products/:id/events/:eventId", (req, res) => {
-  const { id, eventId } = req.params
-  res.send(`id는 ${id} 와 ${eventId}입니다.`)
+app.get("/products/:id", (req, res) => {
+  const { id } = req.params
+  models.Product.findOne({
+    where: {
+      id: id
+    }
+  }).then((result) => {
+    console.log("PRODUCT : ", result)
+    res.send({
+      product: result
+    })
+  }).catch((err) => {
+    console.error(err)
+    res.send("상품 조회 에러 발생")
+  })
 })
 
 app.post("/products", (req, res) => {
-  res.send(req.body);
+  const { name, description, price, seller } = req.body
+  if (!(name && description && price && seller)) {
+    res.send("모든 필드를 입력하세요")
+  }
+  models.Product.create({
+    name,
+    description,
+    price,
+    seller
+  }).then((result) => {
+    console.log("상품 생성 결과 ", result)
+    res.send({
+      result,
+    })
+  }).catch((err) => {
+    console.error(err)
+    res.send("업로드에 문제가 발생했습니다.")
+  })
 });
 
 app.listen(PORT, () => {
