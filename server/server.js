@@ -63,10 +63,13 @@ app.post("/products", (req, res) => {
 
 app.listen(PORT, () => {
   console.log("listening on port " + PORT);
-  models.sequelize.sync().then(() => {
-    console.log("DB connected!")
-  }).catch((err) => {
-    console.error(err)
-    process.exit()
-  })
+  models.sequelize
+    .sync()
+    .then(() => {
+      console.log("DB connected!");
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit();
+    });
 });
