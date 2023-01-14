@@ -24,3 +24,5 @@ yarn-error.log*
 
 /web/node_modules
 /server/node_modules
+
+./server/database.sqlite3
